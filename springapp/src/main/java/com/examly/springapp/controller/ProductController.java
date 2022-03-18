@@ -11,6 +11,7 @@ import com.examly.springapp.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,14 +35,17 @@ public class ProductController {
           return productRepository.findAll();
     }
 
-    @PostMapping("/admin/addProduct")
-    public String productSave(@RequestBody ProductModel product)
-    {
-        return null;
-    }
+     @PostMapping("admin/addProduct")
+     public  ResponseEntity<Map<String,Boolean>> productSave(@RequestBody ProductModel product)
+     {
+        productRepository.save(product);
+        Map<String,Boolean> response=new HashMap<>();
+        response.put("Added", Boolean.TRUE);
+         return ResponseEntity.ok(response);
+     }
     /* to delete the  product by id */
 
-    @GetMapping("admin/delete/{id}")
+    @DeleteMapping("admin/delete/{id}")
     public ResponseEntity<Map<String,Boolean>>  productDelete(@PathVariable String id)
     {
         ProductModel product= productRepository.getById(id);
@@ -65,7 +69,7 @@ public class ProductController {
     @PutMapping(value="admin/productEdit/{id}")
     public ResponseEntity<Map<String,Boolean>> productEditSave(@PathVariable String id,@RequestBody ProductModel productsDetails) {
         ProductModel product= productRepository.getById(id);
-         product.setProductId(productsDetails.getProductId());
+        
          product.setProductName(productsDetails.getProductName());
          product.setImageUrl(productsDetails.getImageUrl());
          product.setPrice(productsDetails.getPrice());

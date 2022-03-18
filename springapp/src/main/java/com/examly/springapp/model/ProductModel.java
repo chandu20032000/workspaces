@@ -2,8 +2,12 @@ package com.examly.springapp.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="products")
@@ -12,6 +16,12 @@ public class ProductModel {
     public ProductModel() {
     }
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+    strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(updatable = false, nullable = false)
     private String productId;
     @Column(length = 256)
     private String imageUrl;
@@ -26,8 +36,7 @@ public class ProductModel {
 
 
 
-    public ProductModel(String productId, String imageUrl, String productName, String price, String description, String quantity) {
-        this.productId = productId;
+    public ProductModel(String imageUrl, String productName, String price, String description, String quantity) {
         this.imageUrl = imageUrl;
         this.productName = productName;
         this.price = price;
