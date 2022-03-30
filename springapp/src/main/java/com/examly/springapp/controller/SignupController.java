@@ -21,7 +21,7 @@ public class SignupController {
 //creating user
     @PostMapping("/signup")
     public Boolean saveUser(@RequestBody UserModel user){
-          user.setActive(true);
+          user.setActive(false);
           user.setRole("user");
           userRepository.save(user);
           return true;

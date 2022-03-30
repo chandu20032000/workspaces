@@ -2,15 +2,8 @@ package com.examly.springapp.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
-import com.examly.springapp.model.CartModel;
 import com.examly.springapp.model.OrderModel;
-import com.examly.springapp.model.UserModel;
-import com.examly.springapp.repository.CartRepository;
 import com.examly.springapp.repository.OrderRepository;
-import com.examly.springapp.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
