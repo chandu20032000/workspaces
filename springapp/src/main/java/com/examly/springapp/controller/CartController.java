@@ -59,4 +59,13 @@ public class CartController {
         response.put("Deleted", Boolean.TRUE);
        return ResponseEntity.ok(response);
     }
+    @PutMapping("cart/update/{id}")
+    public String increamentQuant(@PathVariable String id,@RequestBody CartModel temp)
+    {
+        Optional<CartModel> cartItem=cartRepository.findById(id);
+        CartModel cart=cartItem.get();
+        cart.setQuantity(temp.getQuantity());
+        cartRepository.save(cart);
+          return "true";
+    }
 }
