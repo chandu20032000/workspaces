@@ -51,10 +51,7 @@ public class CartController {
     {
        Optional<CartModel> cartItem=cartRepository.findById(id);
        CartModel cart=cartItem.get();
-
-       UserModel user=cart.getUserId();
        cartRepository.delete(cart);
-        
         Map<String,Boolean> response=new HashMap<>();
         response.put("Deleted", Boolean.TRUE);
        return ResponseEntity.ok(response);
